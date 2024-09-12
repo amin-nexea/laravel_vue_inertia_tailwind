@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Services\UserService;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
@@ -27,6 +28,10 @@ class RegisterController extends Controller
         try {
             $user = $this->userService->create($request->validated());
             Auth::login($user);
+
+            if ($user instanceof MustVerifyEmail && !$user->hasVerifiedEmail()) {
+                return redirect()->route('verification.notice');
+            }
             return redirect()->route('dashboard');
         } catch (\Exception $e) {
             return back()->withErrors(['error' => 'An error occurred during registration. Please try again.']);
