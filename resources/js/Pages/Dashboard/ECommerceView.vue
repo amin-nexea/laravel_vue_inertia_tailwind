@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { defineProps } from 'vue'
+import { Head } from '@inertiajs/vue3'
 import DataStatsOne from '@/components/DataStats/DataStatsOne.vue'
 import ChartOne from '@/components/Charts/ChartOne.vue'
 import ChartThree from '@/components/Charts/ChartThree.vue'
@@ -10,6 +12,8 @@ import DefaultLayout from '@/layouts/DefaultLayout.vue'
 </script>
 
 <template>
+  <Head title="E-Commerce Dashboard" />
+  
   <DefaultLayout>
     <div class="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-4 2xl:gap-7.5">
       <DataStatsOne />
