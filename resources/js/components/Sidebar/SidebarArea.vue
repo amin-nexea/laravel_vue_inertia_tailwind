@@ -299,9 +299,10 @@ const menuGroups = ref([
       '-translate-x-full': !sidebarStore.isSidebarOpen
     }" ref="target">
     <!-- SIDEBAR HEADER -->
-    <div class="flex items-center justify-between gap-2 px-6 py-5.5 lg:py-6.5">
-      <Link href="/">
-      <img src="@/assets/images/logo/logo.svg" alt="Logo" />
+    <div class="flex items-center justify-between lg:justify-center gap-2 px-6 pt-5.5 pb-1 lg:pt-6.5 lg:pb-0">
+      <Link href="/dashboard" class="flex lg:w-full lg:justify-center"> 
+      <img src="@/assets/images/logo/ppz-logo-white-transparent.png" alt="Logo"
+        class="h-20 md:h-20 lg:h-25 object-contain" />
       </Link>
 
       <button class="block lg:hidden" @click="sidebarStore.isSidebarOpen = false">
@@ -317,7 +318,7 @@ const menuGroups = ref([
 
     <div class="no-scrollbar flex flex-col overflow-y-auto duration-300 ease-linear">
       <!-- Sidebar Menu -->
-      <nav class="mt-5 py-4 px-4 lg:mt-9 lg:px-6">
+      <nav class="mt-5 py-4 px-4 lg:mt-5 lg:px-6">
         <template v-for="menuGroup in menuGroups" :key="menuGroup.name">
           <div>
             <h3 class="mb-4 ml-4 text-sm font-medium text-bodydark2">{{ menuGroup.name }}</h3>
