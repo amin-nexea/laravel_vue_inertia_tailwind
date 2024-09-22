@@ -1,20 +1,29 @@
 <script setup lang="ts">
 import { useSidebarStore } from '../../stores/sidebar'
 import { Link, usePage } from '@inertiajs/vue3'
+import type { PageProps } from '@inertiajs/core'
 import SidebarDropdown from './SidebarDropdown.vue'
-import { computed } from 'vue'
+import { computed, watch } from 'vue'
 
 const sidebarStore = useSidebarStore()
-const page = usePage()
 
 const props = defineProps(['item', 'index'])
 
-interface PageProps {
-  route: string;
-  // Add other properties that you expect in your page props
+interface CustomPageProps extends PageProps {
+  route?: string;
 }
 
-const currentRouteName = computed(() => (page.props.value as PageProps).route)
+const page = usePage<CustomPageProps>()
+
+const currentRouteName = computed(() => page.props.route || '')
+
+// Log the currentRouteName whenever it changes
+watch(currentRouteName, (newValue) => {
+  console.log('Current Route Name:', newValue)
+})
+
+// Also log it immediately
+console.log('Initial Current Route Name:', currentRouteName.value)
 
 interface SidebarItem {
   label: string
